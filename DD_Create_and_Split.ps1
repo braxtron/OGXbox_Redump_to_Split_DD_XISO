@@ -3,7 +3,7 @@ $Yes = @("Yes", "YES", "yes", "Y", "y")
 $No = @("No", "NO", "no", "N", "n")
 
 while(-not($Yes.contains($DeleteSource) -or $No.contains($DeleteSource))) {
-	$DeleteSource = Read-Host -Prompt "Delete Source? [Y]es or [N]o"
+    $DeleteSource = Read-Host -Prompt "Delete Source? [Y]es or [N]o"
 }
 
 $Games = Get-ChildItem -Path 'Games' -Filter *.iso
