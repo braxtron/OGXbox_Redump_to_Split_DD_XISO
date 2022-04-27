@@ -4,8 +4,6 @@ You will have the option to save the source isos or have them deleted.
 
 Place all full redump isos in the 'Games' directory and run the powershell script by double clicking DD_Create_and_Split.bat or running the following command:
 
-You'll need dd.exe aliased on your machine. I'm not sure if the included dd.exe will be corrrectly called from the script.
-
 powershell -ExecutionPolicy ByPass -File .\DD_Create_and_Split.ps1
 
 This has no error handling and has only been tested on Windows 10. I can not vouch in any way for the provenance of fSplit.exe, fSplit.exe.config, xdvdfs_maker.exe, or dd.exe. This script comes with no guarantees or warranties. You can find me at:
