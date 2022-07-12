@@ -15,7 +15,7 @@ foreach($Game in $Games) {
 	}
 	
     $GameDD = "Games\" + $GameName + "_DD.iso"
-    ./dd.exe if=Games\$Game of=$GameDD skip=387k bs=1k
+    ./dd.exe if=Games\$Game of=$GameDD skip=1k bs=387k
  	./fSplit.exe -split 4094 mb "$GameDD" -f "Games\$GameName.{0}.iso"
 	
 	Remove-Item $GameDD
