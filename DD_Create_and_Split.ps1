@@ -23,16 +23,18 @@ if($Yes.contains($ExpandArchives)) {
 $Games = Get-ChildItem -Path 'Games' -Filter *.iso
 
 foreach($Game in $Games) {
-	write-output "Processing $Game"
-	$GameName = $Game.BaseName
+	$GameName = $Game.BaseName -replace ('[=\?:;"\*\+,\|]', '_')
+	$GameName = $GameName.Substring(0, $GameName.IndexOf("(")).Trim()
+	write-output "Processing '$Game' as '$GameName'"
+	
 	if($GameName.length -gt 36) {
-        $GameName = $Game.Name.Substring(0,36)
+		$GameName = $Game.Name.Substring(0,36)
 		write-output "Truncating filename to: $GameName"
 	}
 	
-    $GameDD = "Games\" + $GameName + "_DD.iso"
-    & "$PSScriptRoot\dd.exe" @("if=Games\$Game", "of=$GameDD", "skip=387", "bs=1M")
- 	& "$PSScriptRoot\fSplit.exe"  @('-split', 4094, 'mb', $GameDD, '-df', 'Games', '-f', "$GameName.{0}.iso")
+	$GameDD = "Games\" + $GameName + "_DD.iso"
+	& "$PSScriptRoot\dd.exe" @("if=Games\$Game", "of=$GameDD", "skip=387", "bs=1M")
+	& "$PSScriptRoot\fSplit.exe"  @('-split', 4094, 'mb', $GameDD, '-df', 'Games', '-f', "$GameName.{0}.iso")
 	
 	Remove-Item $GameDD
 	if($Yes.contains($DeleteSource)) {
