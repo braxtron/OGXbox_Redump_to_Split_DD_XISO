@@ -34,7 +34,7 @@ foreach($Game in $Games) {
 	
 	$GameDD = "Games\" + $GameName + "_DD.iso"
 	& "$PSScriptRoot\dd.exe" @("if=Games\$Game", "of=$GameDD", "skip=387", "bs=1M")
-	& "$PSScriptRoot\fSplit.exe"  @('-split', 4094, 'mb', $GameDD, '-df', 'Games', '-f', "$GameName.{0}.iso")
+	& "$PSScriptRoot\fSplit.exe"  @('-split', 4032, 'mb', $GameDD, '-df', 'Games', '-f', "$GameName.{0}.iso")
 	
 	Remove-Item $GameDD
 	if($Yes.contains($DeleteSource)) {
